@@ -19,15 +19,15 @@ test_labels  = os.listdir(test_path)
 # tunable parameters
 image_size       = (64, 64)
 num_train_images = 1500
-num_test_images  = 101
+num_test_images  = 100
 num_channels     = 3
 epochs           = 2000
 lr               = 0.01
 
-# train_x dimension = {(64*64*3), 1400}
-# train_y dimension = {1, 1400}
-# test_x dimension  = {(64*64*3), 200}
-# test_y dimension  = {1, 200}
+# train_x dimension = {(64*64*3), 1500}
+# train_y dimension = {1, 1500}
+# test_x dimension  = {(64*64*3), 100}
+# test_y dimension  = {1, 100}
 train_x = np.zeros(((image_size[0]*image_size[1]*num_channels), num_train_images))
 train_y = np.zeros((1, num_train_images))
 test_x  = np.zeros(((image_size[0]*image_size[1]*num_channels), num_test_images))
@@ -67,17 +67,17 @@ for i, label in enumerate(test_labels):
 		count += 1
 	num_label += 1
 
-print ("train_labels : " + str(train_labels))
-print ("train_x shape: " + str(train_x.shape))
-print ("train_y shape: " + str(train_y.shape))
-print ("test_x shape : " + str(test_x.shape))
-print ("test_y shape : " + str(test_y.shape))
-
 #------------------
 # standardization
 #------------------
 train_x = train_x/255.
 test_x  = test_x/255.
+	
+print ("train_labels : " + str(train_labels))
+print ("train_x shape: " + str(train_x.shape))
+print ("train_y shape: " + str(train_y.shape))
+print ("test_x shape : " + str(test_x.shape))
+print ("test_y shape : " + str(test_y.shape))
 
 #-----------------
 # save using h5py
@@ -221,10 +221,10 @@ myModel = model(train_x, train_y, test_x, test_y, epochs, lr)
 # test images using our model
 #------------------------------
 test_img_paths = ["G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\airplane\\image_0723.jpg",
-				  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\airplane\\image_0713.jpg",
-				  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\bike\\image_0782.jpg",
-				  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\bike\\image_0799.jpg",
-				  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\bike\\test_1.jpg"]
+		  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\airplane\\image_0713.jpg",
+		  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\bike\\image_0782.jpg",
+		  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\bike\\image_0799.jpg",
+		  "G:\\workspace\\machine-intelligence\\deep-learning\\logistic-regression\\dataset\\test\\bike\\test_1.jpg"]
 
 for test_img_path in test_img_paths:
 	img_to_show 	= cv2.imread(test_img_path, -1)
